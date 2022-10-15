@@ -6,19 +6,19 @@ const products = [
     id:1,
     name:'Product 1',
     price: 100,
-    decription: 'Product 1 Description'
+    decription: 'Description 1'
   },
   {
     id:2,
     name:'Product 2',
     price: 150,
-    decription: 'Product 2 Description'
+    decription: 'Description 2'
   },
   {
     id:3,
     name:'Product 3',
     price: 60,
-    decription: 'Product 3 Description'
+    decription: 'Description 3'
   },
 ]
 
@@ -33,12 +33,9 @@ function App() {
         <p>
           Hello world !!
         </p>
-        <button 
-          onClick={onHandleClick}
-          className='button-primary'
-          >
+        <button onClick={onHandleClick} className='button-primary'>
             Click me</button>
-
+          <div className='products'>
             {products.map((product)=>(
               <div key={product.id}>
                 <h3>{product.name}</h3>
@@ -46,6 +43,7 @@ function App() {
               </div>
 
             ))}
+          </div>
       </header>
     </div>
   );

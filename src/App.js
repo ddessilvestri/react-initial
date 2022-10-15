@@ -2,6 +2,9 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const onHandleClick = ()=>{
+    console.log("click");
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -9,7 +12,11 @@ function App() {
         <p>
           Hello world !!
         </p>
-        <button className='button-primary'>Click me</button>
+        <button 
+          onClick={onHandleClick}
+          className='button-primary'
+          >
+            Click me</button>
       </header>
     </div>
   );

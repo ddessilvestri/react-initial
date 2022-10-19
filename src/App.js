@@ -29,6 +29,41 @@ function App() {
   const onHandleClick = ()=>{
     console.log("click");
   };
+
+  // const newFind = () =>{
+  //   Array.prototype.newFind = function(callback, args) {
+  //     if(!callback || typeof callback !== 'function') throw TypeError();
+  //     const size = this.length;
+  //     const that = args || this;
+  //     for(let i = 0; i < size; i++){
+  //       try {
+  //         if(!!callback.apply(that, [this[i], this])){
+  //           return this[i];
+  //         }
+  //       } catch(e){
+  //         return undefined;
+  //       }
+  //     }
+  //     return undefined;
+  //   }
+    
+  // }
+
+//  const varvslet = ()=>{
+//    var a = 2;
+//    var a = 3;
+//    console.log("a: ",a);
+
+//    let b = 2;
+
+//    console.log("b  (1) -->", b);
+//    for (let b = 0; b < 5; b++){
+//     console.log("b (2) -->:",b)
+//    }
+   
+//    console.log("b  (1) -->", b);
+//  };
+
   return (
     <div className="App">
       <header className="App-header">

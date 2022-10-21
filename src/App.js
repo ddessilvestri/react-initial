@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import Button from './components/Button';
 
 const products = [
   {
@@ -25,44 +27,35 @@ const products = [
   },
 ]
 
+class ButtonClass extends React.Component{
+  //No es necesario al parecer
+  // constructor(props){
+  //   super(props);
+  // };
+
+  render(){
+    return(
+      <button onClick={this.props.onClick}  className={`button-primary ${this.props.type}`}>{this.props.text}</button>
+    )
+  }
+}
+
+// const Button = ({onClick,type,text})=>{
+//   //className={'button-primary ' + props.type}
+//   return(
+//     <button onClick={onClick}  className={`button-primary ${type}`}>{text}</button>
+//   )
+// }
+
 function App() {
-  const onHandleClick = ()=>{
+
+  const onHandleClick = () => {
     console.log("click");
+  }
+
+  const onHandleAddProduct = () =>{
+    console.log("add product")
   };
-
-  // const newFind = () =>{
-  //   Array.prototype.newFind = function(callback, args) {
-  //     if(!callback || typeof callback !== 'function') throw TypeError();
-  //     const size = this.length;
-  //     const that = args || this;
-  //     for(let i = 0; i < size; i++){
-  //       try {
-  //         if(!!callback.apply(that, [this[i], this])){
-  //           return this[i];
-  //         }
-  //       } catch(e){
-  //         return undefined;
-  //       }
-  //     }
-  //     return undefined;
-  //   }
-    
-  // }
-
-//  const varvslet = ()=>{
-//    var a = 2;
-//    var a = 3;
-//    console.log("a: ",a);
-
-//    let b = 2;
-
-//    console.log("b  (1) -->", b);
-//    for (let b = 0; b < 5; b++){
-//     console.log("b (2) -->:",b)
-//    }
-   
-//    console.log("b  (1) -->", b);
-//  };
 
   return (
     <div className="App">
@@ -71,14 +64,15 @@ function App() {
         <p>
           Hello world !!
         </p>
-        <button onClick={onHandleClick} className='button-primary'>
-            Click me</button>
+        <Button onClick={onHandleClick} text='Click me' type='filled' />
+         
           <div className='products'>
             {products.map((product)=>(
               <div key={product.id}>
                 <h3>{product.name}</h3>
                 <img  className='product-image' src={product.imageUrl} alt={product.name}/>
                 <p>{product.decription}</p>
+                <ButtonClass onClick={onHandleAddProduct} text='Add to Cart' type='borderLine'/>
               </div>
 
             ))}

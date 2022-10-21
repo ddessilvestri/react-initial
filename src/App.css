@@ -39,6 +39,12 @@
   font-weight: bold;
   cursor: pointer;
 }
+.borderLine{
+  border: 2px solid red;
+}
+.filled{
+  background-color: yellow;
+}
 
 .products{
   display: flex;

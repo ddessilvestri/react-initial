@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import React from 'react';
+import React, { useState } from 'react';
 import Button from './components/Button';
 
 const products = [
@@ -40,43 +40,32 @@ class ButtonClass extends React.Component{
   }
 }
 
-// const Button = ({onClick,type,text})=>{
-//   //className={'button-primary ' + props.type}
-//   return(
-//     <button onClick={onClick}  className={`button-primary ${type}`}>{text}</button>
-//   )
-// }
-
 function App() {
 
-  const onHandleClick = () => {
-    console.log("click");
-  }
+  const [counter, setCounter] = useState(0);
+  const [date, setDate] = useState('');
 
-  const onHandleAddProduct = () =>{
-    console.log("add product")
-  };
+  const onHandleClick = () => {
+    let current = new Date();
+    let currentDate= `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()} `;
+    let currentTime =  `${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
+  
+    setCounter(previousCounter => previousCounter+1);
+    setDate(`${currentDate} ${currentTime} `);
+    
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={logo} className="App-logo" alt="logo" />       
         <p>
-          Hello world !!
+          You clicked {counter} times
         </p>
-        <Button onClick={onHandleClick} text='Click me' type='filled' />
-         
-          <div className='products'>
-            {products.map((product)=>(
-              <div key={product.id}>
-                <h3>{product.name}</h3>
-                <img  className='product-image' src={product.imageUrl} alt={product.name}/>
-                <p>{product.decription}</p>
-                <ButtonClass onClick={onHandleAddProduct} text='Add to Cart' type='borderLine'/>
-              </div>
-
-            ))}
-          </div>
+        <p>
+          {date}
+        </p>
+        <Button onClick={onHandleClick} text='Click me' type='filled' />         
       </header>
     </div>
   );

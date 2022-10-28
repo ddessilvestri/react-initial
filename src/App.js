@@ -67,7 +67,7 @@ function App() {
   useEffect(() => {
     const getProducts = ()=>{
       setTimeout(()=>{
-        setProducts(productsArray);
+        resolve(productsArray);
       },2000)
     }
   }, [])
@@ -91,7 +91,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <Button2/>
         <img src={logo} className="App-logo" alt="logo" />       
         <p>{title}</p>
         <p>
@@ -100,7 +99,15 @@ function App() {
         <p>
           {date}
         </p>
-        <Button onClick={onHandleClick} text='Click me' type='filled' />         
+        <Button onClick={onHandleClick} text='Click me' type='filled' />  
+
+        {
+          products.map(prod=>{
+            <div >
+
+            </div>
+          })
+        }       
       </header>
     </div>
   );

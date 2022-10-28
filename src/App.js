@@ -1,9 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Button from './components/Button';
-
-const products = [
+import Button2 from './components/Button2';
+const productsArray = [
   {
     id:1,
     name:'Product 1',
@@ -27,21 +27,10 @@ const products = [
   },
 ]
 
-class ButtonClass extends React.Component{
-  //No es necesario al parecer
-  // constructor(props){
-  //   super(props);
-  // };
-
-  render(){
-    return(
-      <button onClick={this.props.onClick}  className={`button-primary ${this.props.type}`}>{this.props.text}</button>
-    )
-  }
-}
 
 function App() {
-
+  const [products, setProducts] = useState([]);
+  const [title, setTitle] = useState('');
   const [counter, setCounter] = useState(0);
   const [date, setDate] = useState('');
 
@@ -52,13 +41,59 @@ function App() {
   
     setCounter(previousCounter => previousCounter+1);
     setDate(`${currentDate} ${currentTime} `);
+    makeRequestToBuyANewPhone();
     
   }
+  const getCurrentDatetime = ()=>{
 
+    let current = new Date();
+    let currentDate= `${current.getDate()}/${current.getMonth()+1}/${current.getFullYear()} `;
+    let currentTime =  `${current.getHours()}:${current.getMinutes()}:${current.getSeconds()}`;
+  
+    return (
+      `${currentDate} ${currentTime} `
+      );
+  }
+
+  useEffect(() => {
+    setTitle('Hello!');
+  }, [])
+  
+  useEffect(() => {
+    if (counter  > 2)
+      setTitle('Hello World: ' + counter);
+  }, [counter])
+  
+  useEffect(() => {
+    const getProducts = ()=>{
+      setTimeout(()=>{
+        setProducts(productsArray);
+      },2000)
+    }
+  }, [])
+  
+  const makeRequestToBuyANewPhone = ()=>{
+    const pr = new Promise ((resolve)=>
+      setTimeout(() => {
+        
+        resolve(`Response correct: ${getCurrentDatetime()}`);
+        //reject('false');
+      }, 3000)
+    
+    );
+
+    pr.then(
+      result=> console.log(result),
+      error => console.log(error)
+    
+    );
+  } 
   return (
     <div className="App">
       <header className="App-header">
+        <Button2/>
         <img src={logo} className="App-logo" alt="logo" />       
+        <p>{title}</p>
         <p>
           You clicked {counter} times
         </p>

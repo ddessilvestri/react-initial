@@ -2,7 +2,6 @@ import logo from './logo.svg';
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import Button from './components/Button';
-import Button2 from './components/Button2';
 const productsArray = [
   {
     id:1,
@@ -29,7 +28,40 @@ const productsArray = [
 
 
 function App() {
+  //-->        https://62ed3c1c818ab252b60d2c47.mockapi.io/products  
   const [products, setProducts] = useState([]);
+
+  
+  // ASYNC - AWAIT
+  // useEffect(() => {
+  //   const getProducts = async ()=>{
+  //     try {      
+  //       const data = await fetch('https://62ed3c1c818ab252b60d2c47.mockapi.io/products');
+  //       const dataProducts = await data.json();
+  //       setProducts(dataProducts);
+  //     } catch (error) {
+  //       console.log(error)
+  //     }
+  //   };;
+
+  //   getProducts();
+  // }, []);
+
+  // PROMISE
+  useEffect(() => {
+    fetch('https://62ed3c1c818ab252b60d2c47.mockapi.io/products')
+      .then(response => response.json())
+      .then(data=>setProducts(data))
+      .catch(error => console.log(error))
+
+  }, []);
+
+
+
+
+
+  
+  console.log("hay productos?",products)
   const [title, setTitle] = useState('');
   const [counter, setCounter] = useState(0);
   const [date, setDate] = useState('');
@@ -64,13 +96,13 @@ function App() {
       setTitle('Hello World: ' + counter);
   }, [counter])
   
-  useEffect(() => {
-    const getProducts = ()=>{
-      setTimeout(()=>{
-        resolve(productsArray);
-      },2000)
-    }
-  }, [])
+  // useEffect(() => {
+  //   const getProducts = ()=>{
+  //     setTimeout(()=>{
+  //       resolve(productsArray);
+  //     },2000)
+  //   }
+  // }, [])
   
   const makeRequestToBuyANewPhone = ()=>{
     const pr = new Promise ((resolve)=>
@@ -88,6 +120,12 @@ function App() {
     
     );
   } 
+
+
+
+
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -100,14 +138,17 @@ function App() {
           {date}
         </p>
         <Button onClick={onHandleClick} text='Click me' type='filled' />  
-
-        {
-          products.map(prod=>{
-            <div >
-
-            </div>
-          })
-        }       
+        <p>
+          {
+            products.length  > 0 ? 
+            products.map(prod=>(
+              <div key={prod.id}>
+                  <h3>{prod.name}</h3>
+              </div>
+            ))
+            : <h3>No hay productos</h3>
+          }       
+        </p>
       </header>
     </div>
   );
